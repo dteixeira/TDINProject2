@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualPrinter", "VirtualPrinter\VirtualPrinter.csproj", "{523FCDA6-F5BD-4BBC-8BA8-C73F1F2EB825}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualEmailServer", "VirtualEmailServer\VirtualEmailServer.csproj", "{7B9D3EE0-5902-455A-B849-B7825D9713D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedTypes", "SharedTypes\SharedTypes.csproj", "{D8A17884-ABF0-43B5-BBC7-45D7D5B1AD42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreApp", "StoreApp\StoreApp.csproj", "{57D4BB13-6BDA-45FA-B9E3-4179250F82D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{523FCDA6-F5BD-4BBC-8BA8-C73F1F2EB825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{523FCDA6-F5BD-4BBC-8BA8-C73F1F2EB825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{523FCDA6-F5BD-4BBC-8BA8-C73F1F2EB825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{523FCDA6-F5BD-4BBC-8BA8-C73F1F2EB825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B9D3EE0-5902-455A-B849-B7825D9713D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B9D3EE0-5902-455A-B849-B7825D9713D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B9D3EE0-5902-455A-B849-B7825D9713D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B9D3EE0-5902-455A-B849-B7825D9713D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8A17884-ABF0-43B5-BBC7-45D7D5B1AD42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8A17884-ABF0-43B5-BBC7-45D7D5B1AD42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8A17884-ABF0-43B5-BBC7-45D7D5B1AD42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8A17884-ABF0-43B5-BBC7-45D7D5B1AD42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57D4BB13-6BDA-45FA-B9E3-4179250F82D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57D4BB13-6BDA-45FA-B9E3-4179250F82D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57D4BB13-6BDA-45FA-B9E3-4179250F82D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57D4BB13-6BDA-45FA-B9E3-4179250F82D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

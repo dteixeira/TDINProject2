@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NotificationService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NotificationServiceEndpoint_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="INotificationService_SubscribePrinter_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribePrinter" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_SubscribePrinter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribePrinterResponse" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_SubscribeEmailServer_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeEmailServer" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_SubscribeEmailServer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeEmailServerResponse" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_UnsubscribePrinter_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribePrinter" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_UnsubscribePrinter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribePrinterResponse" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_UnsubscribeEmailServer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribeEmailServer" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_UnsubscribeEmailServer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribeEmailServerResponse" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_PrintReceipt_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PrintReceipt" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_PrintReceipt_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PrintReceiptResponse" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_SendEmail_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendEmail" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_SendEmail_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailResponse" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="INotificationService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SubscribePrinter">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotificationService/SubscribePrinter" message="tns:INotificationService_SubscribePrinter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INotificationService/SubscribePrinterResponse" message="tns:INotificationService_SubscribePrinter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SubscribeEmailServer">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotificationService/SubscribeEmailServer" message="tns:INotificationService_SubscribeEmailServer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INotificationService/SubscribeEmailServerResponse" message="tns:INotificationService_SubscribeEmailServer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="false" msc:isTerminating="true" name="UnsubscribePrinter">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotificationService/UnsubscribePrinter" message="tns:INotificationService_UnsubscribePrinter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INotificationService/UnsubscribePrinterResponse" message="tns:INotificationService_UnsubscribePrinter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="false" msc:isTerminating="true" name="UnsubscribeEmailServer">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotificationService/UnsubscribeEmailServer" message="tns:INotificationService_UnsubscribeEmailServer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INotificationService/UnsubscribeEmailServerResponse" message="tns:INotificationService_UnsubscribeEmailServer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PrintReceipt">
+      <wsdl:output wsaw:Action="http://tempuri.org/INotificationService/PrintReceipt" message="tns:INotificationService_PrintReceipt_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/INotificationService/PrintReceiptResponse" message="tns:INotificationService_PrintReceipt_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendEmail">
+      <wsdl:output wsaw:Action="http://tempuri.org/INotificationService/SendEmail" message="tns:INotificationService_SendEmail_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/INotificationService/SendEmailResponse" message="tns:INotificationService_SendEmail_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NotificationServiceEndpoint" type="tns:INotificationService">
+    <wsp:PolicyReference URI="#NotificationServiceEndpoint_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="SubscribePrinter">
+      <soap12:operation soapAction="http://tempuri.org/INotificationService/SubscribePrinter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubscribeEmailServer">
+      <soap12:operation soapAction="http://tempuri.org/INotificationService/SubscribeEmailServer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnsubscribePrinter">
+      <soap12:operation soapAction="http://tempuri.org/INotificationService/UnsubscribePrinter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnsubscribeEmailServer">
+      <soap12:operation soapAction="http://tempuri.org/INotificationService/UnsubscribeEmailServer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintReceipt">
+      <soap12:operation soapAction="http://tempuri.org/INotificationService/PrintReceipt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmail">
+      <soap12:operation soapAction="http://tempuri.org/INotificationService/SendEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NotificationService">
+    <wsdl:port name="NotificationServiceEndpoint" binding="tns:NotificationServiceEndpoint">
+      <soap12:address location="net.tcp://localhost/NotificationService.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost/NotificationService.svc</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>localhost</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
