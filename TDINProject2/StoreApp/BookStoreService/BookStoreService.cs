@@ -146,7 +146,32 @@ namespace BookStoreService
         /// <returns>The created order on success, null otherwise.</returns>
         public ServiceDataTypes.Order CreateOrder(ServiceDataTypes.Order order)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                using (StoreApp.StoreDataClassesDataContext context = new StoreApp.StoreDataClassesDataContext())
+                {
+                    StoreApp.Order created = new StoreApp.Order
+                    {
+                        BookID = order.Book.BookID,
+                        Email = order.Client.Email,
+                        ExpDate = order.ExpDate,
+                        Name = order.Client.Name,
+                        Quantity = order.Quantity,
+                        State = ServiceDataTypes.OrderState.WaitingExpedition.ToString()
+                    };
+                    context.Orders.InsertOnSubmit(created);
+                    context.SubmitChanges();
+
+                    // Notify clients of received order.
+                    StoreApp.StoreManager.Instance.NotifyOrderReceived();
+                    return this.GetOrderByID(created.OrderID);
+                }
+            }
+            catch (System.Exception)
+            {
+                // Return null if anything goes wrong.
+                return null;
+            }
         }
 
         /// <summary>
