@@ -34,7 +34,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookStoreService\BookStoreService.cs" />
+    <Compile Include="BookStoreService\IBookStoreService.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,8 +61,19 @@
     <Compile Include="NotificationService\NotificationService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceDataTypes\Book.cs" />
+    <Compile Include="ServiceDataTypes\Client.cs" />
     <Compile Include="ServiceDataTypes\Email.cs" />
+    <Compile Include="ServiceDataTypes\EnumerationTypes.cs" />
+    <Compile Include="ServiceDataTypes\Order.cs" />
     <Compile Include="ServiceDataTypes\Receipt.cs" />
+    <Compile Include="ServiceDataTypes\Stock.cs" />
+    <Compile Include="StoreDataClasses.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreDataClasses.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="StoreManager.cs" />
     <Compile Include="StoreServiceHost.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -72,6 +87,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="StoreDataClasses.dbml.layout">
+      <DependentUpon>StoreDataClasses.dbml</DependentUpon>
+    </None>
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -82,6 +100,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="StoreDataClasses.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>StoreDataClasses.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

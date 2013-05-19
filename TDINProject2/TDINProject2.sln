@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedTypes", "SharedTypes\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreApp", "StoreApp\StoreApp.csproj", "{57D4BB13-6BDA-45FA-B9E3-4179250F82D2}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "StoreDatabase", "StoreDatabase\StoreDatabase.sqlproj", "{52B1AAF2-2349-41C3-AD07-FF41C6564BF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,12 @@ Global
 		{57D4BB13-6BDA-45FA-B9E3-4179250F82D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57D4BB13-6BDA-45FA-B9E3-4179250F82D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57D4BB13-6BDA-45FA-B9E3-4179250F82D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52B1AAF2-2349-41C3-AD07-FF41C6564BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52B1AAF2-2349-41C3-AD07-FF41C6564BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52B1AAF2-2349-41C3-AD07-FF41C6564BF4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{52B1AAF2-2349-41C3-AD07-FF41C6564BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52B1AAF2-2349-41C3-AD07-FF41C6564BF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52B1AAF2-2349-41C3-AD07-FF41C6564BF4}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

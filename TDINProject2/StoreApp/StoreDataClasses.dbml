@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TDINStoreDatabase" Class="StoreDataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local)\SQLExpress;Initial Catalog=TDINStoreDatabase;Persist Security Info=True;User ID=TestUser" SettingsObjectName="StoreApp.Properties.Settings" SettingsPropertyName="TDINStoreDatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Book" Member="Books">
+    <Type Name="Book">
+      <Column Name="BookID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Author" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="Book_Stock" Member="Stocks" ThisKey="BookID" OtherKey="BookID" Type="Stock" />
+      <Association Name="Book_Order" Member="Orders" ThisKey="BookID" OtherKey="BookID" Type="Order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Stock" Member="Stocks">
+    <Type Name="Stock">
+      <Column Name="StockID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BookID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Copies" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Book_Stock" Member="Book" ThisKey="BookID" OtherKey="BookID" Type="Book" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Order]" Member="Orders">
+    <Type Name="Order">
+      <Column Name="OrderID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BookID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="Book_Order" Member="Book" ThisKey="BookID" OtherKey="BookID" Type="Book" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+</Database>
