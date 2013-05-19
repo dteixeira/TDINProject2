@@ -1,6 +1,6 @@
 ﻿using System.ServiceModel;
 
-namespace Notifications
+namespace NotificationService
 {
     [ServiceContract(SessionMode = SessionMode.Required, CallbackContract = typeof(INotificationServiceCallback))]
     public interface INotificationService

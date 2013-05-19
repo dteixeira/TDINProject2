@@ -1,6 +1,6 @@
 using System.ServiceModel;
 
-namespace Notifications
+namespace NotificationService
 {
     public interface INotificationServiceCallback
     {

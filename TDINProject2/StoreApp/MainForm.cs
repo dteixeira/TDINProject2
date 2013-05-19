@@ -11,6 +11,8 @@ namespace StoreApp
 {
     public partial class MainForm : Form
     {
+        private readonly static string QueueName = @".\private$\TDINStoreWarehouseQueue";
+
         public MainForm()
         {
             InitializeComponent();

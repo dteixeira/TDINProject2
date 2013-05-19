@@ -36,6 +36,11 @@ namespace StoreApp
         private ServiceHost NotificationService { get; set; }
 
         /// <summary>
+        /// Book store service instance.
+        /// </summary>
+        private ServiceHost BookStoreService { get; set; }
+
+        /// <summary>
         /// Starts all the hosted services.
         /// </summary>
         public void StartServices()
@@ -45,8 +50,14 @@ namespace StoreApp
             {
                 this.NotificationService.Close();
             }
-            this.NotificationService = new ServiceHost(typeof(Notifications.NotificationService));
+            if (this.BookStoreService != null)
+            {
+                this.BookStoreService.Close();
+            }
+            this.NotificationService = new ServiceHost(typeof(NotificationService.NotificationService));
             this.NotificationService.Open();
+            this.BookStoreService = new ServiceHost(typeof(BookStoreService.BookStoreService));
+            this.BookStoreService.Open();
         }
 
         /// <summary>
@@ -59,6 +70,11 @@ namespace StoreApp
             {
                 this.NotificationService.Close();
                 this.NotificationService = null;
+            }
+            if (this.BookStoreService != null)
+            {
+                this.BookStoreService.Close();
+                this.BookStoreService = null;
             }
         }
     }
