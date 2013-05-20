@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BookStoreService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BookServiceServiceEndpoint_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBookStoreService_GetStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStock" />
+  </wsdl:message>
+  <wsdl:message name="IBookStoreService_GetStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBookStoreService_GetAllBooks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBooks" />
+  </wsdl:message>
+  <wsdl:message name="IBookStoreService_GetAllBooks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBooksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBookStoreService_GetAllOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOrders" />
+  </wsdl:message>
+  <wsdl:message name="IBookStoreService_GetAllOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBookStoreService_UpdateOrderState_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderState" />
+  </wsdl:message>
+  <wsdl:message name="IBookStoreService_UpdateOrderState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBookStoreService_SendDelivery_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendDelivery" />
+  </wsdl:message>
+  <wsdl:message name="IBookStoreService_SendDelivery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendDeliveryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBookStoreService_CreateOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrder" />
+  </wsdl:message>
+  <wsdl:message name="IBookStoreService_CreateOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBookStoreService_GetAllOrdersByEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOrdersByEmail" />
+  </wsdl:message>
+  <wsdl:message name="IBookStoreService_GetAllOrdersByEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOrdersByEmailResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IBookStoreService">
+    <wsdl:operation name="GetStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookStoreService/GetStock" message="tns:IBookStoreService_GetStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookStoreService/GetStockResponse" message="tns:IBookStoreService_GetStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookStoreService/GetAllBooks" message="tns:IBookStoreService_GetAllBooks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookStoreService/GetAllBooksResponse" message="tns:IBookStoreService_GetAllBooks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookStoreService/GetAllOrders" message="tns:IBookStoreService_GetAllOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookStoreService/GetAllOrdersResponse" message="tns:IBookStoreService_GetAllOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderState">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookStoreService/UpdateOrderState" message="tns:IBookStoreService_UpdateOrderState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookStoreService/UpdateOrderStateResponse" message="tns:IBookStoreService_UpdateOrderState_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendDelivery">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookStoreService/SendDelivery" message="tns:IBookStoreService_SendDelivery_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookStoreService/SendDeliveryResponse" message="tns:IBookStoreService_SendDelivery_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookStoreService/CreateOrder" message="tns:IBookStoreService_CreateOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookStoreService/CreateOrderResponse" message="tns:IBookStoreService_CreateOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrdersByEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookStoreService/GetAllOrdersByEmail" message="tns:IBookStoreService_GetAllOrdersByEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookStoreService/GetAllOrdersByEmailResponse" message="tns:IBookStoreService_GetAllOrdersByEmail_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BookServiceServiceEndpoint" type="tns:IBookStoreService">
+    <wsp:PolicyReference URI="#BookServiceServiceEndpoint_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetStock">
+      <soap12:operation soapAction="http://tempuri.org/IBookStoreService/GetStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooks">
+      <soap12:operation soapAction="http://tempuri.org/IBookStoreService/GetAllBooks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrders">
+      <soap12:operation soapAction="http://tempuri.org/IBookStoreService/GetAllOrders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderState">
+      <soap12:operation soapAction="http://tempuri.org/IBookStoreService/UpdateOrderState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDelivery">
+      <soap12:operation soapAction="http://tempuri.org/IBookStoreService/SendDelivery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder">
+      <soap12:operation soapAction="http://tempuri.org/IBookStoreService/CreateOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrdersByEmail">
+      <soap12:operation soapAction="http://tempuri.org/IBookStoreService/GetAllOrdersByEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BookStoreService">
+    <wsdl:port name="BookServiceServiceEndpoint" binding="tns:BookServiceServiceEndpoint">
+      <soap12:address location="net.tcp://localhost/BookStoreService.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost/BookStoreService.svc</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>localhost</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -57,8 +57,11 @@ namespace StoreApp
             }
             else
             {
-                ListViewItem item = new ListViewItem(new string[] { order.OrderID.ToString(), order.State.ToString(), order.ExpDate == null ? "" : String.Format("{0:d}", order.ExpDate), order.Book.Title, order.Client.Email, order.Quantity.ToString(), (order.Quantity * order.Book.Price).ToString() });
-                this.WaitingOrderListView.Items.Add(item);
+                this.RefreshStoreStockListView();
+                this.RefreshWaitingDeliveryListView();
+                this.RefreshCompletedDeliveryListView();
+                this.RefreshWaitingOrderListView();
+                this.RefreshCompletedOrderListView();
             }
         }
 
