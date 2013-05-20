@@ -20,7 +20,7 @@ namespace BookStoreService
         bool UpdateOrderState(Order order);
 
         [OperationContract]
-        bool SendStock(Stock stock);
+        bool SendDelivery(Delivery delivery);
 
         [OperationContract]
         Order CreateOrder(Order order);

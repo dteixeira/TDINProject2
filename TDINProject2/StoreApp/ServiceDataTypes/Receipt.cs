@@ -6,9 +6,6 @@ namespace ServiceDataTypes
     public class Receipt
     {
         [DataMember]
-        public string OrderID { get; set; }
-
-        [DataMember]
         public string ClientName { get; set; }
 
         [DataMember]

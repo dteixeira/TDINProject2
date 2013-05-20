@@ -28,6 +28,9 @@ namespace WarehouseApp.BookStoreService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int CopiesField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int StockIDField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -60,6 +63,19 @@ namespace WarehouseApp.BookStoreService {
                 if ((this.CopiesField.Equals(value) != true)) {
                     this.CopiesField = value;
                     this.RaisePropertyChanged("Copies");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int StockID {
+            get {
+                return this.StockIDField;
+            }
+            set {
+                if ((this.StockIDField.Equals(value) != true)) {
+                    this.StockIDField = value;
+                    this.RaisePropertyChanged("StockID");
                 }
             }
         }
@@ -302,6 +318,9 @@ namespace WarehouseApp.BookStoreService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -314,6 +333,19 @@ namespace WarehouseApp.BookStoreService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
             }
         }
         
@@ -367,6 +399,99 @@ namespace WarehouseApp.BookStoreService {
         FutureDispatch = 2,
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Delivery", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    [System.SerializableAttribute()]
+    public partial class Delivery : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool AcceptedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int DeliveryIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WarehouseApp.BookStoreService.Order OrderField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuantityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Accepted {
+            get {
+                return this.AcceptedField;
+            }
+            set {
+                if ((this.AcceptedField.Equals(value) != true)) {
+                    this.AcceptedField = value;
+                    this.RaisePropertyChanged("Accepted");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeliveryID {
+            get {
+                return this.DeliveryIDField;
+            }
+            set {
+                if ((this.DeliveryIDField.Equals(value) != true)) {
+                    this.DeliveryIDField = value;
+                    this.RaisePropertyChanged("DeliveryID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WarehouseApp.BookStoreService.Order Order {
+            get {
+                return this.OrderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrderField, value) != true)) {
+                    this.OrderField = value;
+                    this.RaisePropertyChanged("Order");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Quantity {
+            get {
+                return this.QuantityField;
+            }
+            set {
+                if ((this.QuantityField.Equals(value) != true)) {
+                    this.QuantityField = value;
+                    this.RaisePropertyChanged("Quantity");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BookStoreService.IBookStoreService")]
     public interface IBookStoreService {
@@ -383,8 +508,8 @@ namespace WarehouseApp.BookStoreService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBookStoreService/UpdateOrderState", ReplyAction="http://tempuri.org/IBookStoreService/UpdateOrderStateResponse")]
         bool UpdateOrderState(WarehouseApp.BookStoreService.Order order);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBookStoreService/SendStock", ReplyAction="http://tempuri.org/IBookStoreService/SendStockResponse")]
-        bool SendStock(WarehouseApp.BookStoreService.Stock stock);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBookStoreService/SendDelivery", ReplyAction="http://tempuri.org/IBookStoreService/SendDeliveryResponse")]
+        bool SendDelivery(WarehouseApp.BookStoreService.Delivery delivery);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBookStoreService/CreateOrder", ReplyAction="http://tempuri.org/IBookStoreService/CreateOrderResponse")]
         WarehouseApp.BookStoreService.Order CreateOrder(WarehouseApp.BookStoreService.Order order);
@@ -436,8 +561,8 @@ namespace WarehouseApp.BookStoreService {
             return base.Channel.UpdateOrderState(order);
         }
         
-        public bool SendStock(WarehouseApp.BookStoreService.Stock stock) {
-            return base.Channel.SendStock(stock);
+        public bool SendDelivery(WarehouseApp.BookStoreService.Delivery delivery) {
+            return base.Channel.SendDelivery(delivery);
         }
         
         public WarehouseApp.BookStoreService.Order CreateOrder(WarehouseApp.BookStoreService.Order order) {

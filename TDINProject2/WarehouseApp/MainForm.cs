@@ -100,7 +100,7 @@ namespace WarehouseApp
                         BookID = order.Book.BookID,
                         BookTitle = order.Book.Title,
                         Completed = false,
-                        Quantity = order.Quantity
+                        Quantity = order.Quantity * 10
                     };
                     context.Deliveries.InsertOnSubmit(delivery);
                     context.SubmitChanges();
@@ -223,12 +223,12 @@ namespace WarehouseApp
                             this.BookStoreClient.UpdateOrderState(order);
 
                             // Send delivery.
-                            BookStoreService.Stock stock = new BookStoreService.Stock
+                            BookStoreService.Delivery toDeliver = new BookStoreService.Delivery
                             {
-                                Book = new BookStoreService.Book { BookID = delivery.BookID },
-                                Copies = delivery.Quantity * 10
+                                Order = order,
+                                Quantity = delivery.Quantity
                             };
-                            this.BookStoreClient.SendStock(stock);
+                            this.BookStoreClient.SendDelivery(toDeliver);
 
                             // Update the delivery state.
                             delivery.Completed = true;

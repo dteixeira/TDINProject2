@@ -7,5 +7,6 @@
     [ExpDate] DATE NULL, 
     [Email] NVARCHAR(256) NOT NULL, 
     [Name] NVARCHAR(256) NOT NULL, 
+    [Address] NVARCHAR(256) NOT NULL, 
     CONSTRAINT [FK_Order_ToBook] FOREIGN KEY ([BookID]) REFERENCES [Book]([BookID]) ON DELETE CASCADE
 )

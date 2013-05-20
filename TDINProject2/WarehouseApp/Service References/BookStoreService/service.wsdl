@@ -41,11 +41,11 @@
   <wsdl:message name="IBookStoreService_UpdateOrderState_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateOrderStateResponse" />
   </wsdl:message>
-  <wsdl:message name="IBookStoreService_SendStock_InputMessage">
-    <wsdl:part name="parameters" element="tns:SendStock" />
+  <wsdl:message name="IBookStoreService_SendDelivery_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendDelivery" />
   </wsdl:message>
-  <wsdl:message name="IBookStoreService_SendStock_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SendStockResponse" />
+  <wsdl:message name="IBookStoreService_SendDelivery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendDeliveryResponse" />
   </wsdl:message>
   <wsdl:message name="IBookStoreService_CreateOrder_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateOrder" />
@@ -76,9 +76,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBookStoreService/UpdateOrderState" message="tns:IBookStoreService_UpdateOrderState_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBookStoreService/UpdateOrderStateResponse" message="tns:IBookStoreService_UpdateOrderState_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SendStock">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBookStoreService/SendStock" message="tns:IBookStoreService_SendStock_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBookStoreService/SendStockResponse" message="tns:IBookStoreService_SendStock_OutputMessage" />
+    <wsdl:operation name="SendDelivery">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookStoreService/SendDelivery" message="tns:IBookStoreService_SendDelivery_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookStoreService/SendDeliveryResponse" message="tns:IBookStoreService_SendDelivery_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IBookStoreService/CreateOrder" message="tns:IBookStoreService_CreateOrder_InputMessage" />
@@ -129,8 +129,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SendStock">
-      <soap12:operation soapAction="http://tempuri.org/IBookStoreService/SendStock" style="document" />
+    <wsdl:operation name="SendDelivery">
+      <soap12:operation soapAction="http://tempuri.org/IBookStoreService/SendDelivery" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

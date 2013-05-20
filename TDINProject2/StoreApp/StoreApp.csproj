@@ -62,8 +62,15 @@
     <Compile Include="NotificationService\NotificationService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SellPopupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SellPopupForm.Designer.cs">
+      <DependentUpon>SellPopupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ServiceDataTypes\Book.cs" />
     <Compile Include="ServiceDataTypes\Client.cs" />
+    <Compile Include="ServiceDataTypes\Delivery.cs" />
     <Compile Include="ServiceDataTypes\Email.cs" />
     <Compile Include="ServiceDataTypes\EnumerationTypes.cs" />
     <Compile Include="ServiceDataTypes\Order.cs" />
@@ -88,6 +95,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SellPopupForm.resx">
+      <DependentUpon>SellPopupForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="StoreDataClasses.dbml.layout">
       <DependentUpon>StoreDataClasses.dbml</DependentUpon>
     </None>

@@ -33,12 +33,12 @@ namespace StoreApp
         /// <summary>
         /// Notification service instance.
         /// </summary>
-        private ServiceHost NotificationService { get; set; }
+        public ServiceHost NotificationService { get; private set; }
 
         /// <summary>
         /// Book store service instance.
         /// </summary>
-        private ServiceHost BookStoreService { get; set; }
+        public ServiceHost BookStoreService { get; private set; }
 
         /// <summary>
         /// Starts all the hosted services.

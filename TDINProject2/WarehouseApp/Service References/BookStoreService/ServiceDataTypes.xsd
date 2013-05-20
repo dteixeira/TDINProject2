@@ -11,6 +11,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Book" nillable="true" type="tns:Book" />
       <xs:element minOccurs="0" name="Copies" type="xs:int" />
+      <xs:element minOccurs="0" name="StockID" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Stock" nillable="true" type="tns:Stock" />
@@ -48,6 +49,7 @@
   <xs:element name="Order" nillable="true" type="tns:Order" />
   <xs:complexType name="Client">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
@@ -61,4 +63,13 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="OrderState" nillable="true" type="tns:OrderState" />
+  <xs:complexType name="Delivery">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Accepted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DeliveryID" type="xs:int" />
+      <xs:element minOccurs="0" name="Order" nillable="true" type="tns:Order" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Delivery" nillable="true" type="tns:Delivery" />
 </xs:schema>

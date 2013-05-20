@@ -6,13 +6,10 @@ namespace ServiceDataTypes
     public class Email
     {
         [DataMember]
-        public string OrderID { get; set; }
+        public System.Guid OrderID { get; set; }
 
         [DataMember]
-        public string ClientName { get; set; }
-
-        [DataMember]
-        public string ClientEmail { get; set; }
+        public Client Client { get; set; }
 
         [DataMember]
         public string BookTitle { get; set; }

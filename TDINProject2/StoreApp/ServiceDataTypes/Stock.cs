@@ -8,6 +8,9 @@ namespace ServiceDataTypes
     public class Stock
     {
         [DataMember]
+        public int StockID { get; set; }
+
+        [DataMember]
         public Book Book { get; set; }
 
         [DataMember]

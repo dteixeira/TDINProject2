@@ -64,6 +64,7 @@
     <Build Include="Stock.sql" />
     <Build Include="Order.sql" />
     <Build Include="CreateStockTrigger.sql" />
+    <Build Include="Delivery.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="StoreDatabase.refactorlog" />

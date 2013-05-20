@@ -76,7 +76,6 @@ namespace VirtualPrinter
         public void PrintReceipt(Receipt receipt)
         {
             System.Console.WriteLine("\n\n------------------------");
-            System.Console.WriteLine("{0,-15}{1}", "Order ID:", receipt.OrderID);
             System.Console.WriteLine("{0,-15}{1}", "Client Name:", receipt.ClientName);
             System.Console.WriteLine("{0,-15}{1}", "Store NIF:", "123456789");
             System.Console.WriteLine("{0,-15}{1} x{2}", "Order:", receipt.BookTitle, receipt.BookQuantity);

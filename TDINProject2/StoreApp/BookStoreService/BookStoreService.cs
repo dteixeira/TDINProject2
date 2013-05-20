@@ -98,6 +98,7 @@ namespace BookStoreService
                     updated.State = order.State.ToString();
                     updated.ExpDate = order.ExpDate;
                     context.SubmitChanges();
+                    StoreApp.StoreManager.Instance.NotifyOrderStateUpdated(this.GetOrderByID(order.OrderID));
                     return true;
                 }
             }
@@ -113,24 +114,74 @@ namespace BookStoreService
         /// </summary>
         /// <param name="stock">Delivery information</param>
         /// <returns>True if success, False otherwise</returns>
-        public bool SendStock(ServiceDataTypes.Stock stock)
+        public bool SendDelivery(ServiceDataTypes.Delivery delivery)
         {
             try
             {
-                var deliver = StoreApp.StoreManager.Instance.WarehouseDelivery;
-                var s = deliver.FirstOrDefault(f => f.Book.BookID == stock.Book.BookID);
-                if (s != null)
+                using (StoreApp.StoreDataClassesDataContext context = new StoreApp.StoreDataClassesDataContext())
                 {
-                    s.Copies += stock.Copies;
+                    var created = new StoreApp.Delivery
+                    {
+                        Accepted = false,
+                        OrderID = delivery.Order.OrderID,
+                        Quantity = delivery.Quantity
+                    };
+                    context.Deliveries.InsertOnSubmit(created);
+                    context.SubmitChanges();
+                    StoreApp.StoreManager.Instance.NotifyDeliveryReceived(this.GetDeliveryByID(created.DeliveryID));
+                    return true;
                 }
-                else
-                {
-                    deliver.Add(stock);
-                }
+            }
+            catch (System.Exception)
+            {
+                // Return false if anything goes wrong.
+                return false;
+            }
+        }
 
-                // Nofity reception of stock.
-                StoreApp.StoreManager.Instance.NotifyStockReceived();
-                return true;
+        // Accepts a delivery and increments the stock.
+        public bool AcceptDelivery(int deliveryID)
+        {
+            try
+            {
+                using (StoreApp.StoreDataClassesDataContext context = new StoreApp.StoreDataClassesDataContext())
+                {
+                    var delivery = context.Deliveries.FirstOrDefault(d => d.DeliveryID == deliveryID);
+                    delivery.Accepted = true;
+                    var stock = context.Stocks.FirstOrDefault(s => s.BookID == delivery.Order.BookID);
+                    stock.Copies += delivery.Quantity;
+                    context.SubmitChanges();
+
+                    // Update all orders that can be satisfied.
+                    var waitingOrders =
+                        from o in context.Orders
+                        where o.BookID == delivery.Order.BookID && o.State == ServiceDataTypes.OrderState.FutureDispatch.ToString()
+                        select o;
+                    foreach (var order in waitingOrders)
+                    {
+                        // Update if order can be satisfied.
+                        if (stock.Copies >= order.Quantity)
+                        {
+                            stock.Copies -= order.Quantity;
+                            order.State = ServiceDataTypes.OrderState.Dispatched.ToString();
+                            order.ExpDate = System.DateTime.Today;
+                            context.SubmitChanges();
+
+                            // Send email to the client.
+                            ServiceDataTypes.Email email = new ServiceDataTypes.Email
+                            {
+                                BookQuantity = order.Quantity,
+                                BookTitle = order.Book.Title,
+                                Client = new ServiceDataTypes.Client { Address = order.Address, Email = order.Email, Name = order.Name },
+                                DispatchDate = (System.DateTime)order.ExpDate,
+                                OrderID = order.OrderID,
+                                TotalPrice = order.Book.Price * order.Quantity
+                            };
+                            NotificationService.NotificationService.Instance.NotifyEmailServers(email);
+                        }
+                    }
+                    return true;
+                }
             }
             catch (System.Exception)
             {
@@ -150,21 +201,55 @@ namespace BookStoreService
             {
                 using (StoreApp.StoreDataClassesDataContext context = new StoreApp.StoreDataClassesDataContext())
                 {
+                    // Create standard order object.
                     StoreApp.Order created = new StoreApp.Order
                     {
+                        Address = order.Client.Address,
                         BookID = order.Book.BookID,
                         Email = order.Client.Email,
-                        ExpDate = order.ExpDate,
                         Name = order.Client.Name,
-                        Quantity = order.Quantity,
-                        State = ServiceDataTypes.OrderState.WaitingExpedition.ToString()
+                        Quantity = order.Quantity
                     };
+
+                    // Check if there is enough stock to satisfy order.
+                    var stock = context.Stocks.FirstOrDefault(s => s.BookID == order.Book.BookID);
+                    if (stock.Copies >= order.Quantity)
+                    {
+                        stock.Copies -= order.Quantity;
+                        created.State = ServiceDataTypes.OrderState.Dispatched.ToString();
+                        created.ExpDate = System.DateTime.Today.AddDays(1);
+                    }
+                    else
+                    {
+                        created.State = ServiceDataTypes.OrderState.WaitingExpedition.ToString();
+                    }
                     context.Orders.InsertOnSubmit(created);
                     context.SubmitChanges();
+                    order = this.GetOrderByID(created.OrderID);
+
+                    // Request a delivery to the warehouse if needed.
+                    if (order.State == ServiceDataTypes.OrderState.WaitingExpedition)
+                    {
+                        StoreApp.StoreManager.Instance.Queue.Send(order);
+                    }
+                    else
+                    {
+                        // Send email to the client.
+                        ServiceDataTypes.Email email = new ServiceDataTypes.Email
+                        {
+                            BookQuantity = order.Quantity,
+                            BookTitle = order.Book.Title,
+                            Client = order.Client,
+                            DispatchDate = (System.DateTime)order.ExpDate,
+                            OrderID = order.OrderID,
+                            TotalPrice = order.Book.Price * order.Quantity
+                        };
+                        NotificationService.NotificationService.Instance.NotifyEmailServers(email);
+                    }
 
                     // Notify clients of received order.
-                    StoreApp.StoreManager.Instance.NotifyOrderReceived();
-                    return this.GetOrderByID(created.OrderID);
+                    StoreApp.StoreManager.Instance.NotifyOrderReceived(order);
+                    return order;
                 }
             }
             catch (System.Exception)
@@ -218,8 +303,9 @@ namespace BookStoreService
                     var order = context.Orders.FirstOrDefault(o => o.OrderID == orderID);
                     return new ServiceDataTypes.Order
                     {
+                        OrderID = order.OrderID,
                         Book = this.GetBookByID(order.BookID),
-                        Client = new ServiceDataTypes.Client { Email = order.Email, Name = order.Name },
+                        Client = new ServiceDataTypes.Client { Email = order.Email, Name = order.Name, Address = order.Address },
                         ExpDate = order.ExpDate,
                         Quantity = order.Quantity,
                         State = (ServiceDataTypes.OrderState)System.Enum.Parse(typeof(ServiceDataTypes.OrderState), order.State)
@@ -247,6 +333,7 @@ namespace BookStoreService
                     var book = context.Books.FirstOrDefault(b => b.BookID == bookID);
                     return new ServiceDataTypes.Book
                     {
+                        BookID = book.BookID,
                         Author = book.Author,
                         Price = book.Price,
                         Title = book.Title
@@ -274,8 +361,37 @@ namespace BookStoreService
                     var stock = context.Stocks.FirstOrDefault(s => s.StockID == stockID);
                     return new ServiceDataTypes.Stock
                     {
+                        StockID = stock.StockID,
                         Book = this.GetBookByID(stock.BookID),
                         Copies = stock.Copies
+                    };
+                }
+            }
+            catch (System.Exception)
+            {
+                // Return null if anything goes wrong.
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Gets a delivery by its ID.
+        /// </summary>
+        /// <param name="orderID">Delivery's ID</param>
+        /// <returns>The delivery info on success, null otherwise.</returns>
+        public ServiceDataTypes.Delivery GetDeliveryByID(int deliveryID)
+        {
+            try
+            {
+                using (StoreApp.StoreDataClassesDataContext context = new StoreApp.StoreDataClassesDataContext())
+                {
+                    var delivery = context.Deliveries.FirstOrDefault(s => s.DeliveryID == deliveryID);
+                    return new ServiceDataTypes.Delivery
+                    {
+                        DeliveryID = delivery.DeliveryID,
+                        Accepted = delivery.Accepted,
+                        Order = this.GetOrderByID(delivery.OrderID),
+                        Quantity = delivery.Quantity
                     };
                 }
             }

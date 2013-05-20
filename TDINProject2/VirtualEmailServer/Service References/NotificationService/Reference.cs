@@ -32,9 +32,6 @@ namespace VirtualEmailServer.NotificationService {
         private string ClientNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string OrderIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double TotalPriceField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -82,19 +79,6 @@ namespace VirtualEmailServer.NotificationService {
                 if ((object.ReferenceEquals(this.ClientNameField, value) != true)) {
                     this.ClientNameField = value;
                     this.RaisePropertyChanged("ClientName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string OrderID {
-            get {
-                return this.OrderIDField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.OrderIDField, value) != true)) {
-                    this.OrderIDField = value;
-                    this.RaisePropertyChanged("OrderID");
                 }
             }
         }
@@ -138,16 +122,13 @@ namespace VirtualEmailServer.NotificationService {
         private string BookTitleField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ClientEmailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ClientNameField;
+        private VirtualEmailServer.NotificationService.Client ClientField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime DispatchDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string OrderIDField;
+        private System.Guid OrderIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double TotalPriceField;
@@ -189,27 +170,14 @@ namespace VirtualEmailServer.NotificationService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ClientEmail {
+        public VirtualEmailServer.NotificationService.Client Client {
             get {
-                return this.ClientEmailField;
+                return this.ClientField;
             }
             set {
-                if ((object.ReferenceEquals(this.ClientEmailField, value) != true)) {
-                    this.ClientEmailField = value;
-                    this.RaisePropertyChanged("ClientEmail");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ClientName {
-            get {
-                return this.ClientNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ClientNameField, value) != true)) {
-                    this.ClientNameField = value;
-                    this.RaisePropertyChanged("ClientName");
+                if ((object.ReferenceEquals(this.ClientField, value) != true)) {
+                    this.ClientField = value;
+                    this.RaisePropertyChanged("Client");
                 }
             }
         }
@@ -228,12 +196,12 @@ namespace VirtualEmailServer.NotificationService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string OrderID {
+        public System.Guid OrderID {
             get {
                 return this.OrderIDField;
             }
             set {
-                if ((object.ReferenceEquals(this.OrderIDField, value) != true)) {
+                if ((this.OrderIDField.Equals(value) != true)) {
                     this.OrderIDField = value;
                     this.RaisePropertyChanged("OrderID");
                 }
@@ -249,6 +217,83 @@ namespace VirtualEmailServer.NotificationService {
                 if ((this.TotalPriceField.Equals(value) != true)) {
                     this.TotalPriceField = value;
                     this.RaisePropertyChanged("TotalPrice");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Client", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    [System.SerializableAttribute()]
+    public partial class Client : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
                 }
             }
         }
