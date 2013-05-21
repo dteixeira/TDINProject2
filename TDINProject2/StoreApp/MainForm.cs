@@ -251,6 +251,7 @@ namespace StoreApp
                 this.RefreshCompletedOrderListView();
                 this.RefreshCompletedDeliveryListView();
                 this.RefreshWaitingDeliveryListView();
+                this.RefreshStoreStockListView();
             }
         }
     }
