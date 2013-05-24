@@ -1,4 +1,5 @@
-﻿using VirtualEmailServer.NotificationService;
+﻿using System.Net.Mail;
+using VirtualEmailServer.NotificationService;
 
 namespace VirtualPrinter
 {
@@ -84,23 +85,38 @@ namespace VirtualPrinter
         /// <param name="email">Email to redirect</param>
         public void SendEmail(Email email)
         {
-            System.Console.WriteLine("\n\n------------------------");
-            System.Console.WriteLine("Sent to: {0}\n", email.Client.Email);
-            System.Console.WriteLine("Dear {0},\n\n", email.Client.Name);
-            System.Console.WriteLine("Your order of {0} unit(s) of \"{1}\"", email.BookQuantity, email.BookTitle);
-            System.Console.WriteLine("was dispatched on {0:d}, and will arrive", email.DispatchDate);
-            System.Console.WriteLine("to {0} in the next few days.", email.Client.Address);
-            System.Console.WriteLine("A total of {0:N} Euros have been charged to your account.", email.TotalPrice);
-            System.Console.WriteLine("\nThank you for shopping with us.");
-            System.Console.WriteLine("Best regards, The Management");
-            System.Console.WriteLine("\n******Order details******");
-            System.Console.WriteLine("{0,-15}{1}", "Order ID:", email.OrderID);
-            System.Console.WriteLine("{0,-15}{1}", "Client Name:", email.Client.Name);
-            System.Console.WriteLine("{0,-15}{1}", "Client Address:", email.Client.Address);
-            System.Console.WriteLine("{0,-15}{1}", "Store NIF:", "123456789");
-            System.Console.WriteLine("{0,-15}{1} x{2}", "Order:", email.BookTitle, email.BookQuantity);
-            System.Console.WriteLine("{0,-15}{1:N} Euros", "Total Price:", email.TotalPrice);
-            System.Console.WriteLine("------------------------");
+            string content = "";
+            content += string.Format("\n\n------------------------\n");
+            content += string.Format("Sent to: {0}\n\n", email.Client.Email);
+            content += string.Format("Dear {0},\n\n", email.Client.Name);
+            content += string.Format("Your order of {0} unit(s) of \"{1}\"\n", email.BookQuantity, email.BookTitle);
+            content += string.Format("was dispatched on {0:d}, and will arrive\n", email.DispatchDate);
+            content += string.Format("to {0} in the next few days.\n", email.Client.Address);
+            content += string.Format("A total of {0:N} Euros have been charged to your account.\n", email.TotalPrice);
+            content += string.Format("\nThank you for shopping with us.\n");
+            content += string.Format("Best regards, The Management\n");
+            content += string.Format("\n******Order details******\n");
+            content += string.Format("{0,-15}{1}\n", "Order ID:", email.OrderID);
+            content += string.Format("{0,-15}{1}\n", "Client Name:", email.Client.Name);
+            content += string.Format("{0,-15}{1}\n", "Client Address:", email.Client.Address);
+            content += string.Format("{0,-15}{1}\n", "Store NIF:", "123456789");
+            content += string.Format("{0,-15}{1} x{2}\n", "Order:", email.BookTitle, email.BookQuantity);
+            content += string.Format("{0,-15}{1:N} Euros\n", "Total Price:", email.TotalPrice);
+            content += string.Format("------------------------\n");
+
+            // Print in console.
+            System.Console.WriteLine(content);
+
+            // Send email using FEUP's smtp server.
+            MailMessage mail = new MailMessage("fake@tdin.com", email.Client.Email);
+            SmtpClient client = new SmtpClient();
+            client.Port = 25;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Host = "smtp.fe.up.pt";
+            mail.Subject = "TDIN Order Confirmation";
+            mail.Body = content;
+            client.Send(mail);
         }
 
         public static void Main(string[] args)
